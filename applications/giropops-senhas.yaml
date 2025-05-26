@@ -14,6 +14,7 @@ spec:
     namespace: giropops-senhas
     server: 'https://kubernetes.default.svc'
   syncPolicy:
-    automated: {}
+    automated:
+      selfHeal: true # garante que o cluster esta em sincronia com o repositorio(fonte de verdade), ou seja, o cluster so ira executar o que estiver no repo
     syncOptions:
     - CreateNamespace=true
