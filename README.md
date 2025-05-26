@@ -95,15 +95,19 @@ kubectl apply -f applications/giropops-senhas.yaml
 ### Troubleshooting
 
 Source: ArgoCD
+
 Problem: Failed to load target state: failed to generate manifest for source 1 of 1: rpc error: code = Unknown desc = unable to resolve 'feat/day2' to a commit SHA
-Solution: Executar o push na branch específica para o remote server, deletar o application e aplicá-lo novamente.
+
+Solution: Executar o push na branch específica para o remote server, deletar o application e aplicá-lo novamente
+
 Exemplo: 
+```
 git add .
 git commit -m "comment"
 git push origin feat/day2
-git push --set-upstream origin feat/day2
 kubectl delete -f application/giropops-senhas.yaml
 kubectl apply -f application/giropops-senhas.yaml
+```
 
 
 
