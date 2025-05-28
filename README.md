@@ -62,7 +62,7 @@ Settings -> Developer Settings -> Persnoal Access Tokens -> Tokens(classic) -> G
 
 Note:linuxtips-gitops-argocd
 
-Expiration: 30 dias
+Expiration: 7 dias
 
 Select Scopes: selecionar somente repo
 
@@ -91,6 +91,13 @@ Nota: Não é obrigatório que os arquivos application do ArgoCD estejam no mesm
 ```
 kubectl apply -f applications/giropops-senhas.yaml
 ```
+
+#### Criar o application de app-of-apps ArgoCD
+```
+kubectl apply -f applications/app-of-apps.yaml
+```
+
+
 
 ### Troubleshooting
 
