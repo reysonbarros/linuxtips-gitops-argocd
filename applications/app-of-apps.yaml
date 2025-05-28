@@ -16,10 +16,10 @@ spec:
         value: "true"
       - name: "argocd.randomLogger.enabled"
         value: "true"
-    repoURL: https://github.com/reysonbarros/linuxtips-gitops-argocd.git
+    repoURL: https://github.com/bernardolsp/descomplicando-gitops-no-kubernetes-argocd.git
     targetRevision: feat/day2
   syncPolicy:
     automated:
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+    - CreateNamespace=true 
