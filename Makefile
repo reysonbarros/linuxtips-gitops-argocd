@@ -12,5 +12,8 @@ install-argocd:
 apply-application-giropops-senhas:
 	kubectl apply -f applications/giropops-senhas.yaml
 
+apply-application-apps-of-apps:
+	kubectl apply -f applications/app-of-apps.yaml	
+
 delete-all:	
 	kind delete clusters argocd
