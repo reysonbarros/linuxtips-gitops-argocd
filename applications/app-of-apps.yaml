@@ -11,7 +11,7 @@ spec:
   source:
     path: app-of-apps
     helm:
-      parameters:
+      parameters: # parametros que sobrescrevem os valores do values.yaml
       - name: "argocd.giropopsSenhas.enabled"
         value: "true"
       - name: "argocd.randomLogger.enabled"
