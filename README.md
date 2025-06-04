@@ -134,9 +134,16 @@ Habilitar Active
 
 Nota: Webhooks permite um serviço externo ser notificado quando certos eventos ocorrem.
 
+#### Adiconando uma Sync Window do ArgoCD
+Settings -> Projects -> Select project(default or specific) -> Open tab Sync Window -> Add Sync Window
 
-
-
+Kind: allow(permitir) ou deny(revogar)
+Schedule: representa o momento em que a Sync Window será ativada
+Time Zone: representa o horário baseado no time zone Pais/Cidade
+Duration: representa a duração da Sync Window
+Applications: representa as aplicações atribuídas para a Sync Window
+Namespaces: representa os namespaces atribuídos para a Sync Window
+Clusters: representa os clusters atribuídos para a Sync Window
 
 
 
