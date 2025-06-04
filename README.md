@@ -97,6 +97,48 @@ kubectl apply -f applications/giropops-senhas.yaml
 kubectl apply -f applications/app-of-apps.yaml
 ```
 
+#### Instalando o ngrok para expor o serviço local do argocd na Internet
+```
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+  && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+  | sudo tee /etc/apt/sources.list.d/ngrok.list \
+  && sudo apt update \
+  && sudo apt install ngrok
+```
+
+#### Configurando o token do ngrok
+```
+ngrok config add-authtoken <your_token>
+```
+
+#### Expondo a url local do argocd pelo ngrok
+```
+ngrok http https://localhost:8080
+```
+
+#### Acessar a url gerada pelo ngrok
+```
+https://efc9-2804-d4b-9435-5900-f3c1-210b-6581-e116.ngrok-free.app
+```
+
+#### Configurando um Webhooks no Github
+Project -> Settings -> Webhooks -> Add webhook
+Payload url:  https://efc9-2804-d4b-9435-5900-f3c1-210b-6581-e116.ngrok-free.app/api/webhook -> endpoint do webhook do argocd
+Content type: application/json
+SSL Verification: Disable
+Which events would you like to trigger this webhook? Send me everything.
+Para ambiente produtivo habilitar somente Push e Repositories
+Habilitar Active
+
+
+Nota: Webhooks permite um serviço externo ser notificado quando certos eventos ocorrem.
+
+
+
+
+
+
 
 
 ### Troubleshooting
