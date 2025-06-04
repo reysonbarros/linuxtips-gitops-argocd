@@ -15,7 +15,7 @@ spec:
       - name: "giropopsSenhas.replicas"
         value: "{{ .Values.argocd.giropopsSenhas.replicas }}"
     path: giropops-senhas/helm
-    repoURL: https://github.com/bernardolsp/descomplicando-gitops-no-kubernetes-argocd.git
+    repoURL: 'https://github.com/reysonbarros/linuxtips-gitops-argocd.git'
     targetRevision: feat/day2
   syncPolicy:
     automated:
