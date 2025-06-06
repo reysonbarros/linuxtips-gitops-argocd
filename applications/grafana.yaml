@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-app
+  namespace: argocd
+spec:
+  project: default
+  sources: # possibilidade de usar varios sources
+  - repoURL: 'https://grafana.github.io/helm-charts' # repositorio remoto
+    chart: grafana
+    targetRevision: 7.0.19
+    helm:
+      valueFiles:
+        $values/grafana/values.yaml # $values sera substituido pelo repoURL https://github.com/reysonbarros/linuxtips-gitops-argocd.git
+  - repoURL: 'https://github.com/reysonbarros/linuxtips-gitops-argocd.git' # repositorio local
+    targetRevision: feat/day2
+    ref: values # variavel que representa o repoURL
