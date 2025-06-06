@@ -145,7 +145,17 @@ Applications: representa as aplicações atribuídas para a Sync Window
 Namespaces: representa os namespaces atribuídos para a Sync Window
 Clusters: representa os clusters atribuídos para a Sync Window
 
+Obs: Fazer testes com deny e allow, simular alguma alteração no values.yaml da pasta app-of-apps e fazer o push. De acordo com a configuração realizada do Sync Window deve-se acessar o ArgoCD para validar se foi possível ou não realizar o sincronismo da alteração realizada.
+Ex: Só permitir deploy(sync) após às 22h durante dias úteis, exceto sexta-feira.
 
+#### Explicação da estrutura dos arquivos
+Ao executar o comando k apply -f applications/app-of-apps.yaml, será realizado o seguinte:
+- Baseada nos valores dos parâmetros argocd.giropopsSenhas.enabled e argocd.randomLogger.enabled o ArgoCD tentará realizar o deploy do application app-of-apps no namespace argocd. Esses parâmetros sobrescrevem os valores do values.yaml.
+  - Se o parâmetro argocd.giropopsSenhas.enabled=true então será feito o deploy do application giropops-app.yaml, caso contrário o deploy não será realizado
+    - O application giropops-app.yaml está referenciando o helm giropopsSenhas na pasta giropops-senhas/helm para ser feito o deploy
+  
+  - Se o parâmetro argocd.randomLogger.enabled=true então será feito o deploy do application randomlogger-app.yaml da pasta template, caso contrário o deploy não será realizado
+    - O application randomlogger-app.yaml está referenciando o helm random-logger na pasta random-logger/helm para ser feito o deploy
 
 
 ### Troubleshooting
