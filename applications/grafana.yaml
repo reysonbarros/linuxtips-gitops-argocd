@@ -15,3 +15,11 @@ spec:
   - repoURL: 'https://github.com/reysonbarros/linuxtips-gitops-argocd.git' # repositorio local
     targetRevision: feat/day2
     ref: values # variavel que representa o repoURL
+  destination:
+    namespace: monitoring
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      selfHeal: true # garante que o cluster esta em sincronia com o repositorio(fonte de verdade), ou seja, o cluster so ira executar o que estiver no repo
+    syncOptions:
+    - CreateNamespace=true
