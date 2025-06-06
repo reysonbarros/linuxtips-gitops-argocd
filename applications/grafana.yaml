@@ -14,7 +14,7 @@ spec:
       - $values/grafana/values.yaml # $values sera substituido pelo repoURL https://github.com/reysonbarros/linuxtips-gitops-argocd.git
   - repoURL: 'https://github.com/reysonbarros/linuxtips-gitops-argocd.git' # repositorio local
     targetRevision: feat/day2
-    ref: values # variavel que representa o repoURL
+    ref: values # variavel que representa o repositorio local
   destination:
     namespace: monitoring
     server: 'https://kubernetes.default.svc'
