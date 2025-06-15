@@ -157,6 +157,19 @@ Ao executar o comando k apply -f applications/app-of-apps.yaml, será realizado 
   - Se o parâmetro argocd.randomLogger.enabled=true então será feito o deploy do application randomlogger-app.yaml da pasta template, caso contrário o deploy não será realizado
     - O application randomlogger-app.yaml está referenciando o helm random-logger na pasta random-logger/helm para ser feito o deploy
 
+#### Executar o applicationset
+```
+kubectl apply -f applicationset/manifests/Applicationset.yaml
+```
+
+#### Instalação do stern para analise de logs em múltiplos pods no K8S
+```
+curl -Lo stern 
+https://github.com/wercker/stern/releases/download/{VERSION}/stern_linux_amd64
+chmod +x stern
+sudo mv stern /usr/local/bin/
+```
+
 
 ### Troubleshooting
 

@@ -11,12 +11,12 @@ spec:
       repoURL: https://github.com/reysonbarros/linuxtips-gitops-argocd.git
       revision: feat/day3
       directories: # Diretorio dos projetos helm
-      - path: applicationset/apps/*/helm # Nesse caso vai realizar o deploy dos helm charts que estao como subdiretorios da pasta apps, ou seja, giropops-senhas, random-logger e qualquer outro que for criado seguindo essa estrutura de pastas
+      - path: applicationset/apps/*/helm # Nesse caso vai realizar o deploy dos helm charts que estao como subdiretorios da pasta apps, ou seja, giropops-senhas, random-logger e qualquer outro que for criado seguindo essa estrutura de pastas        
       #- path: applicationset/apps/random-logger/helm # Nesse caso, NAO iria realizar o deploy do random-logger devido a diretiva(exclude=true)
       #  exclude: true
   template:
     metadata:
-      name: '{{index .path.segments 3}}' # Posicao/Index ex: [index=0,pos=1]->applicationset, [index=1,pos=2]->apps, [index=2,pos=3]->giropops-senhas, [index=3,pos=4]->helm
+      name: '{{index .path.segments 2}}' # Posicao/Index ex: [index=0,pos=1]->applicationset, [index=1,pos=2]->apps, [index=2,pos=3]->giropops-senhas, [index=3,pos=4]->helm
     spec:
       project: "default"
       source: # Fonte de origem do projeto
@@ -25,7 +25,7 @@ spec:
         path: '{{.path.path}}'
       destination: # Onde sera feito o deploy
         server: https://kubernetes.default.svc
-        namespace: '{{index .path.segments 3}}'
+        namespace: '{{index .path.segments 2}}'
       syncPolicy:
         automated: {}
         syncOptions:
