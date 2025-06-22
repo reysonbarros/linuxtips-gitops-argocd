@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-addons
+  namespace: argocd
+spec:
+  goTemplate: true # ArgoCD tinha sua propria linguagem e atualmente decidiram adotar go como default language
+  goTemplateOptions: ["missingkey=error"] # Nao iterar em algo que nao exista, ou seja, vai gerar um erro
+  generators: # Sao responsaveis pela geracao de parametros renderizados nos templates. Ex: Git Generator, Matrix Generator, Pull Request Generator etc
+  - matrix:  
+    - git: # Permite criar Applications basedos em arquivos dentro de um repositorio Git
+        repoURL: https://github.com/reysonbarros/linuxtips-gitops-argocd.git
+        revision: feat/day3
+        directories: # Diretorio dos projetos helm
+        - path: applicationset/apps/*/helm # Nesse caso vai realizar o deploy dos helm charts que estao como subdiretorios da pasta apps, ou seja, giropops-senhas, random-logger e qualquer outro que for criado seguindo essa estrutura de pastas        
+        #- path: applicationset/apps/random-logger/helm # Nesse caso, NAO iria realizar o deploy do random-logger devido a diretiva(exclude=true)
+        #  exclude: true
+    - git:
+        repoURL: https://github.com/reysonbarros/linuxtips-gitops-argocd.git
+        revision: feat/day3
+        pathParamPrefix: cfg
+        files:
+          - paths: applicationset/configs/dev.json
+  template:
+    metadata:
+      name: '{{index .path.segments 2}}-{{.cluster.nome}}' # Posicao/Index ex: [index=0,pos=1]->applicationset, [index=1,pos=2]->apps, [index=2,pos=3]->giropops-senhas, [index=3,pos=4]->helm
+    spec:
+      project: "default"
+      source: # Fonte de origem do projeto
+        repoURL: https://github.com/reysonbarros/linuxtips-gitops-argocd.git
+        targetRevision: feat/day3
+        path: '{{.path.path}}'
+        #helm:
+        #  parameters:
+        #    - name: cluster
+        #      value: '{{.cluster.nome}}'
+
+      destination: # Onde sera feito o deploy
+        server: https://kubernetes.default.svc
+        namespace: '{{index .path.segments 2}}'
+      syncPolicy:
+        automated: {}
+        syncOptions:
+        - CreateNamespace=true # Cria o namespace caso não exista
