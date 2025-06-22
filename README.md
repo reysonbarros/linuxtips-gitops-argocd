@@ -157,7 +157,7 @@ Ao executar o comando k apply -f applications/app-of-apps.yaml, será realizado 
   - Se o parâmetro argocd.randomLogger.enabled=true então será feito o deploy do application randomlogger-app.yaml da pasta template, caso contrário o deploy não será realizado
     - O application randomlogger-app.yaml está referenciando o helm random-logger na pasta random-logger/helm para ser feito o deploy
 
-#### Executar o applicationset
+#### Executar o Applicationset
 ```
 kubectl apply -f applicationset/manifests/Applicationset.yaml
 ```
@@ -170,6 +170,10 @@ chmod +x stern
 sudo mv stern /usr/local/bin/
 ```
 
+#### Executar o Applicationset with Matrix Git Generator
+```
+kubectl apply -f applicationset/manifests/ApplicationsetMatrix.yam
+```
 
 ### Troubleshooting
 
